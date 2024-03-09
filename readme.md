@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://img.shields.io/static/v1?label=STATUS&message=ANDAMENTO&color=FF0000&style=for-the-badge"/>
+<img src="https://img.shields.io/static/v1?label=STATUS&message=ANDAMENTO&color=GREEN&style=for-the-badge"/>
 </div>
 
 # Projeto: Importador de XML
