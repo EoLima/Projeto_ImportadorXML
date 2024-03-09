@@ -166,7 +166,6 @@
             // 
             this.caminhoBanco.Location = new System.Drawing.Point(146, 104);
             this.caminhoBanco.Name = "caminhoBanco";
-            this.caminhoBanco.ReadOnly = true;
             this.caminhoBanco.Size = new System.Drawing.Size(343, 20);
             this.caminhoBanco.TabIndex = 9;
             // 
@@ -219,10 +218,11 @@
             // 
             // listaEmpresas
             // 
+            this.listaEmpresas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.listaEmpresas.FormattingEnabled = true;
             this.listaEmpresas.Location = new System.Drawing.Point(146, 156);
             this.listaEmpresas.Name = "listaEmpresas";
-            this.listaEmpresas.Size = new System.Drawing.Size(189, 43);
+            this.listaEmpresas.Size = new System.Drawing.Size(307, 41);
             this.listaEmpresas.TabIndex = 15;
             // 
             // versao
@@ -232,7 +232,7 @@
             this.versao.Name = "versao";
             this.versao.Size = new System.Drawing.Size(61, 13);
             this.versao.TabIndex = 16;
-            this.versao.Text = "Versão: 0.2";
+            this.versao.Text = "Versão: 0.3";
             // 
             // selecionarEmpresa
             // 
@@ -246,6 +246,7 @@
             // 
             // Form1
             // 
+            this.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.ClientSize = new System.Drawing.Size(653, 406);
             this.Controls.Add(this.selecionarEmpresa);
             this.Controls.Add(this.versao);
@@ -287,13 +288,13 @@
         private System.Windows.Forms.Button procurarBanco;
         private System.Windows.Forms.FolderBrowserDialog abrirBanco;
         private System.Windows.Forms.Button testarConexao;
-        private System.Windows.Forms.ListBox listaEmpresas;
         private System.Windows.Forms.DataGridViewTextBoxColumn Empresa;
         private System.Windows.Forms.DataGridViewTextBoxColumn cNF;
         private System.Windows.Forms.DataGridViewTextBoxColumn chNFe;
         private System.Windows.Forms.DataGridViewTextBoxColumn nProt;
         private System.Windows.Forms.Label versao;
         private System.Windows.Forms.Label selecionarEmpresa;
+        private System.Windows.Forms.ListBox listaEmpresas;
     }
 }
 
