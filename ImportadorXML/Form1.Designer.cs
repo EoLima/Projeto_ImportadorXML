@@ -39,6 +39,8 @@
             this.cNF = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chNFe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nProt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Lote = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Xml = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.confirmacao = new System.Windows.Forms.Label();
             this.caminhoBanco = new System.Windows.Forms.TextBox();
             this.ipBanco = new System.Windows.Forms.TextBox();
@@ -50,6 +52,8 @@
             this.listaEmpresas = new System.Windows.Forms.ListBox();
             this.versao = new System.Windows.Forms.Label();
             this.selecionarEmpresa = new System.Windows.Forms.Label();
+            this.textoDenegada = new System.Windows.Forms.Label();
+            this.denegadaS = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.visualizarXml)).BeginInit();
             this.SuspendLayout();
             // 
@@ -111,8 +115,10 @@
             this.Empresa,
             this.cNF,
             this.chNFe,
-            this.nProt});
-            this.visualizarXml.Location = new System.Drawing.Point(12, 263);
+            this.nProt,
+            this.Lote,
+            this.Xml});
+            this.visualizarXml.Location = new System.Drawing.Point(10, 263);
             this.visualizarXml.Name = "visualizarXml";
             this.visualizarXml.ReadOnly = true;
             this.visualizarXml.Size = new System.Drawing.Size(629, 105);
@@ -150,6 +156,18 @@
             this.nProt.Name = "nProt";
             this.nProt.ReadOnly = true;
             this.nProt.Width = 120;
+            // 
+            // Lote
+            // 
+            this.Lote.HeaderText = "Lote";
+            this.Lote.Name = "Lote";
+            this.Lote.ReadOnly = true;
+            // 
+            // Xml
+            // 
+            this.Xml.HeaderText = "Xml";
+            this.Xml.Name = "Xml";
+            this.Xml.ReadOnly = true;
             // 
             // confirmacao
             // 
@@ -244,10 +262,31 @@
             this.selecionarEmpresa.TabIndex = 17;
             this.selecionarEmpresa.Text = "Selecione a Empresa:";
             // 
+            // textoDenegada
+            // 
+            this.textoDenegada.AutoSize = true;
+            this.textoDenegada.Location = new System.Drawing.Point(554, 226);
+            this.textoDenegada.Name = "textoDenegada";
+            this.textoDenegada.Size = new System.Drawing.Size(83, 13);
+            this.textoDenegada.TabIndex = 22;
+            this.textoDenegada.Text = "NF Denegada ?";
+            // 
+            // denegadaS
+            // 
+            this.denegadaS.AutoSize = true;
+            this.denegadaS.Location = new System.Drawing.Point(557, 242);
+            this.denegadaS.Name = "denegadaS";
+            this.denegadaS.Size = new System.Drawing.Size(43, 17);
+            this.denegadaS.TabIndex = 23;
+            this.denegadaS.Text = "Sim";
+            this.denegadaS.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.ClientSize = new System.Drawing.Size(653, 406);
+            this.Controls.Add(this.denegadaS);
+            this.Controls.Add(this.textoDenegada);
             this.Controls.Add(this.selecionarEmpresa);
             this.Controls.Add(this.versao);
             this.Controls.Add(this.listaEmpresas);
@@ -288,13 +327,17 @@
         private System.Windows.Forms.Button procurarBanco;
         private System.Windows.Forms.FolderBrowserDialog abrirBanco;
         private System.Windows.Forms.Button testarConexao;
+        private System.Windows.Forms.Label versao;
+        private System.Windows.Forms.Label selecionarEmpresa;
+        private System.Windows.Forms.ListBox listaEmpresas;
         private System.Windows.Forms.DataGridViewTextBoxColumn Empresa;
         private System.Windows.Forms.DataGridViewTextBoxColumn cNF;
         private System.Windows.Forms.DataGridViewTextBoxColumn chNFe;
         private System.Windows.Forms.DataGridViewTextBoxColumn nProt;
-        private System.Windows.Forms.Label versao;
-        private System.Windows.Forms.Label selecionarEmpresa;
-        private System.Windows.Forms.ListBox listaEmpresas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Lote;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Xml;
+        private System.Windows.Forms.Label textoDenegada;
+        private System.Windows.Forms.CheckBox denegadaS;
     }
 }
 

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace ImportadorXML
 {
@@ -23,56 +25,68 @@ namespace ImportadorXML
             abrirXml.Filter = "XML Files|*.xml";
             abrirXml.FilterIndex = 0;
             abrirXml.DefaultExt = "xml";
+            abrirXml.Multiselect = true;
+
+            List<string> listaInseridos = new List<string>();
+            List<string> listaNaoInseridos = new List<string>();
 
             if (abrirXml.ShowDialog() == DialogResult.OK)
             {
-                string caminhoArquivo = abrirXml.FileName;
-                Xml notaFiscal = new Xml();
-
-                this.caminhoArquivo.Text = caminhoArquivo;
-
-                try
+                foreach (string Arquivos in abrirXml.FileNames)
                 {
-                    string selecionado = listaEmpresas.SelectedItem.ToString();
+                    Xml notaFiscal = new Xml();
+                    caminhoArquivo.Text += $" {Arquivos}";
 
-                    selecionado = String.Join("", System.Text.RegularExpressions.Regex.Split(selecionado, @"[^\d]"));
-                    int idEmpresa = int.Parse(selecionado);
+                    string denegada = (denegadaS.Checked == true) ? "S" : "N";
 
-                    if (notaFiscal.LerArquivo(caminhoArquivo) == true)
+                    try
                     {
-                        visualizarXml.Rows.Add(selecionado, notaFiscal.NNf, notaFiscal.ChNFe, notaFiscal.NProt);
-                        BancoDados bancoDados = new BancoDados(caminhoBanco.Text, ipBanco.Text);
-                        var inserir = bancoDados.InsirirDados(idEmpresa, notaFiscal.NNf, notaFiscal.ChNFe, notaFiscal.NfeDenegada, notaFiscal.NProt);
+                        string selecionado = listaEmpresas.SelectedItem.ToString();
 
-                        switch (inserir)
+                        selecionado = String.Join("", System.Text.RegularExpressions.Regex.Split(selecionado, @"[^\d]"));
+                        int idEmpresa = int.Parse(selecionado);
+
+                        if (notaFiscal.LerArquivo(Arquivos, denegada) == true)
                         {
-                            case true:
-                                confirmacao.ForeColor = Color.Green;
-                                confirmacao.Text = "INSERIDO!";
-                                break;
+                            BancoDados bancoDados = new BancoDados(caminhoBanco.Text, ipBanco.Text);
+                            var inserir = bancoDados.InsirirDados(idEmpresa, notaFiscal.NNf, notaFiscal.ChNFe, notaFiscal.NfeDenegada, notaFiscal.NProt, notaFiscal.XmlString);
+                            visualizarXml.Rows.Add(selecionado, notaFiscal.NNf, notaFiscal.ChNFe, notaFiscal.NProt, bancoDados.Lote, notaFiscal.XmlString);
 
-                            case false:
-                                confirmacao.ForeColor = Color.Red;
-                                confirmacao.Text = "XML JÁ IMPORTADO.";
-                                break;
+                            switch (inserir)
+                            {
+                                case true:
+                                    listaInseridos.Add($"{notaFiscal.NNf}");
+                                    break;
+
+                                case false:
+                                    listaNaoInseridos.Add($"{notaFiscal.NNf}");
+                                    break;
+                            }
+                        }
+                    }
+                    // tem que arrumar para o denegado ?
+                    catch (NullReferenceException)
+                    {
+                        if (string.IsNullOrEmpty(caminhoBanco.Text))
+                        {
+                            MessageBox.Show($"Selecione a pasta do Banco de Dados!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else if (string.IsNullOrEmpty(ipBanco.Text) && listaEmpresas.SelectedItem == null && !string.IsNullOrEmpty(caminhoBanco.Text))
+                        {
+                            MessageBox.Show($"Verifique o Ip do Banco de Dados", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else if (listaEmpresas.SelectedItem == null && !string.IsNullOrEmpty(ipBanco.Text) && !string.IsNullOrEmpty(caminhoBanco.Text))
+                        {
+                            MessageBox.Show($"Selecione Uma Empresa!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
-                catch (NullReferenceException)
-                {
-                    if (string.IsNullOrEmpty(caminhoBanco.Text))
-                    {
-                        MessageBox.Show($"Selecione a pasta do Banco de Dados!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else if (string.IsNullOrEmpty(ipBanco.Text) && listaEmpresas.SelectedItem == null && !string.IsNullOrEmpty(caminhoBanco.Text))
-                    {
-                        MessageBox.Show($"Verifique o Ip do Banco de Dados", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else if (listaEmpresas.SelectedItem == null && !string.IsNullOrEmpty(ipBanco.Text) && !string.IsNullOrEmpty(caminhoBanco.Text))
-                    {
-                        MessageBox.Show($"Selecione Uma Empresa!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
+
+                denegadaS.Checked = false;
+
+                string resultoInseridos = String.Join(", ", listaInseridos);
+                string resultoNaoInseridos = String.Join(", ", listaNaoInseridos);
+                MessageBox.Show($"Notas Inseridas: {resultoInseridos} \nNotas Não Inseridas ou Repitidas: {resultoNaoInseridos}", "Informções", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

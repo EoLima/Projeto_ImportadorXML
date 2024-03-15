@@ -1,0 +1,25 @@
+MANTIS #001
+1 - AO FAZER O INSERT INSERIR SEMPRE COM ESSE NOME DE LOTE NO CAMPO PEDF_NFE_NOME_LOTE = LOTE_IMP_USU_00.00.00_00000000000000_0-.xml
+	- OK!
+	
+2 - PODER INSERIR MAIS DE UM XML
+	* Como confirmar os arquivos ? 48 até 59 do Form1.cs
+		R: Colocar um pop up mostrando qual não foi.
+			...posso colocar num array ?....
+			-OK!
+		
+3 - CRIAR UMA FLAG PARA INFORMAR SE É NFE IMPORTADA É DENEGADA.
+	* O que acontece se não é denegada ?
+		R: colocar como N
+		...comecei um pouco...verificar amanha...
+		R: Esta feito, só precisa tirar um dos botoes e verificar a logica.
+		OK!
+	
+4 - SUBIR OS DADOS DO XML PARA A TABELA PEDF_NFE
+	- OK!
+	
+
+5 - CONSULTAR A NOTA DENEGADA, BAIXAR PROTOCOLO DE AUTORIZAÇAO
+	...WebService tras ele apenas como denegada...Como buscar o protoculo de autorizacao?
+	...Entender melhor o processo de nota denegada...Pesquisar no ACBR talvez alguem ja tenha feito....
+	

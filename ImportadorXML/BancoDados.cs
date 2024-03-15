@@ -9,12 +9,14 @@ namespace ImportadorXML
         private string Conexao;
         private string CaminhoBanco;
         private string Ip;
+        public string Lote { get; private set; }
 
         public BancoDados(string caminhoBanco, string ip)
         {
             CaminhoBanco = caminhoBanco;
             Ip = ip;
             Conexao = $"User=SYSDBA;Password=masterkey;Database={CaminhoBanco}\\nfe.fdb;DataSource={Ip};Port=3050;Dialect=3;";
+            Lote = "LOTE_IMP_USU_00.00.00_00000000000000_0-.xml";
         }
 
         public bool ConexaoBanco()
@@ -43,11 +45,11 @@ namespace ImportadorXML
             }
         }
 
-        public bool InsirirDados(int idEmpresa, int nNf, string chNFe, string nfeDenegada, string nProt)
+        public bool InsirirDados(int idEmpresa, int nNf, string chNFe, string nfeDenegada, string nProt, string xml)
         {
             try
             {
-                string consultaInsercao = "INSERT INTO PEDIDO_FAT_NFE (PEDF_PEDF_EMP_ID, PEDF_PEDF_ID, PEDF_NFE_CHAVE, PEDF_NFE_DENEGADA, PEDF_NFE_PROT_AUT_NFE) VALUES (@PEDF_PEDF_EMP_ID, @PEDF_PEDF_ID, @PEDF_NFE_CHAVE, @PEDF_NFE_DENEGADA, @PEDF_NFE_PROT_AUT_NFE)";
+                string consultaInsercao = "INSERT INTO PEDIDO_FAT_NFE (PEDF_PEDF_EMP_ID, PEDF_PEDF_ID, PEDF_NFE_CHAVE, PEDF_NFE_DENEGADA, PEDF_NFE_PROT_AUT_NFE, PEDF_NFE_NOME_LOTE, PEDF_NFE) VALUES (@PEDF_PEDF_EMP_ID, @PEDF_PEDF_ID, @PEDF_NFE_CHAVE, @PEDF_NFE_DENEGADA, @PEDF_NFE_PROT_AUT_NFE, @PEDF_NFE_NOME_LOTE, @PEDF_NFE)";
 
                 using (FbConnection conexao = new FbConnection(Conexao))
                 {
@@ -61,6 +63,8 @@ namespace ImportadorXML
                         comando.Parameters.AddWithValue("@PEDF_NFE_CHAVE", chNFe);
                         comando.Parameters.AddWithValue("@PEDF_NFE_DENEGADA", nfeDenegada);
                         comando.Parameters.AddWithValue("@PEDF_NFE_PROT_AUT_NFE", nProt);
+                        comando.Parameters.AddWithValue("@PEDF_NFE_NOME_LOTE", Lote);
+                        comando.Parameters.AddWithValue("@PEDF_NFE", xml);
 
                         comando.ExecuteNonQuery();
                         conexao.Close();
