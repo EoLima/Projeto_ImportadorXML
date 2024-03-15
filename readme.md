@@ -4,16 +4,14 @@
 
 # Projeto: Importador de XML
 
-Esse é um projeto pessoal no qual fiz para um colega de trabalho, afim de automatizar a importação de informações do XML diretamente para o Banco de Dados (FireBird).
+Esse é um projeto pessoal no qual fiz para amigo querido e colega de trabalho, afim de automatizar a importação de informações do XML diretamente para o Banco de Dados (FireBird).
 
-O projeto é bem simples e ainda está em desenvolvimento e em constantes melhorias.
+O projeto é bem simples e ainda está em desenvolvimento, em constantes melhorias.
 
 # 📷 Versão .Exe
 
 <div align="center" >
- <img src="https://github.com/EoLima/Estudo_Phyton/assets/123023440/886dea79-c5df-41cc-9960-d2d2770a91c9">
- <img src="https://github.com/EoLima/Estudo_Phyton/assets/123023440/cc09a641-5781-4f6d-8533-6821841ecef5">
- <img src="https://github.com/EoLima/Estudo_Phyton/assets/123023440/194a1182-2082-4971-af31-b7e59692fe99">
+ <img src="https://github.com/EoLima/Projeto_ImportadorXML/assets/123023440/cbf4a1d5-14ad-4f12-968f-595b7e7a4c46">
 </div>
 
 ## 🧑🏾‍💻 Ferramentas Utilizadas
